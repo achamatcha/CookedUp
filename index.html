@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CookieUp — Freshly Baked Happiness</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FAF6F0',
+            beige: '#F3ECE1',
+            choco: '#3B200D',
+            chocoBtn: '#5E3313',
+            chocoHover: '#47250C',
+            caramel: '#B07D4F',
+            warmBorder: '#E9DFD1'
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            script: ['"Dancing Script"', 'cursive'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-color: #FAF6F0;
+      color: #3B200D;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .paper-texture {
+      background-color: #FAF6F0;
+      background-image: radial-gradient(rgba(94, 51, 19, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    .hero-overlay {
+      background: linear-gradient(90deg, #FAF6F0 0%, rgba(250,246,240,0.96) 36%, rgba(250,246,240,0.65) 58%, rgba(250,246,240,0.05) 85%, transparent 100%);
+    }
+    @media (max-width: 768px) {
+      .hero-overlay {
+        background: linear-gradient(180deg, rgba(250,246,240,0.94) 0%, rgba(250,246,240,0.88) 55%, rgba(250,246,240,0.35) 100%);
+      }
+    }
+    .ornament-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .ornament-divider::before,
+    .ornament-divider::after {
+      content: "";
+      height: 1px;
+      width: 90px;
+      background-color: #DECDB9;
+    }
+  </style>
+</head>
+<body class="paper-texture antialiased selection:bg-[#5E3313] selection:text-white">
+
+  <!-- CLOSED ORDER BANNER -->
+  <div id="closed-banner" class="hidden bg-[#43240F] text-[#FAF6F0] text-center py-2.5 px-4 text-sm font-medium sticky top-0 z-50 shadow-md">
+    🔒 Maaf, <span class="font-bold">CookieUp</span> sedang <span class="underline decoration-[#D9A773]">Close Order (Tutup Sementara)</span>. Pesanan saat ini dikunci dan belum bisa diproses.
+  </div>
+
+  <!-- HEADER -->
+  <header class="bg-[#FAF6F0]/95 backdrop-blur-sm border-b border-[#EFE6DA] sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+      <!-- Logo Tersembunyi untuk Akses Admin -->
+      <div id="admin-logo-trigger" title="CookieUp" class="flex items-center gap-2.5 cursor-pointer select-none group">
+        <span class="text-3xl leading-none transition-transform group-hover:scale-105" aria-hidden="true">🍪</span>
+        <div class="flex flex-col items-center">
+          <span class="font-serif font-bold text-2xl sm:text-[26px] tracking-tight text-[#3B200D] leading-none">CookieUp</span>
+          <div class="flex items-center gap-1.5 mt-1 w-full justify-center">
+            <span class="h-[1px] w-5 bg-[#CBB8A3]"></span>
+            <span class="text-[9px] tracking-[0.28em] text-[#7D5E47] font-semibold uppercase">COOKIES</span>
+            <span class="h-[1px] w-5 bg-[#CBB8A3]"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation & Tombol Keranjang (Ikon + Angka Isi) -->
+      <div class="flex items-center gap-3 md:gap-8">
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-[#5A3D28]">
+          <a href="#home" class="text-[#3B200D] font-semibold border-b-2 border-[#7A4A24] pb-1">Home</a>
+          <a href="#menu" class="hover:text-[#3B200D] transition">Menu</a>
+          <a href="#about" class="hover:text-[#3B200D] transition">About Us</a>
+          <a href="#club" class="hover:text-[#3B200D] transition">Gallery</a>
+        </nav>
+
+        <a href="#menu" class="md:hidden text-xs font-semibold text-[#5E3313] px-2 py-1.5">Menu</a>
+
+        <button type="button" id="open-cart-btn" aria-label="Keranjang Belanja" class="inline-flex items-center gap-1.5 bg-[#5E3313] hover:bg-[#47250C] text-white px-3.5 py-2 rounded-md shadow-sm transition">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+          </svg>
+          <span id="cart-badge-count" class="text-xs font-bold bg-[#FAF6F0] text-[#3B200D] min-w-[20px] h-5 px-1.5 rounded-full inline-flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="relative w-full overflow-hidden border-b border-[#EFE6DA]">
+    <div class="relative max-w-[1440px] mx-auto min-h-[450px] md:min-h-[500px] flex items-center">
+      <img
+        src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1600&q=85"
+        alt="Freshly Baked Cookies"
+        class="absolute inset-0 w-full h-full object-cover object-right"
+      />
+      <div class="hero-overlay absolute inset-0"></div>
+
+      <div class="relative z-10 max-w-6xl mx-auto w-full px-5 sm:px-8 py-14">
+        <div class="max-w-lg">
+          <h1 class="font-serif font-bold text-4xl sm:text-[52px] text-[#3B200D] leading-[1.08] tracking-tight">
+            Freshly Baked<br />
+            <span class="inline-flex items-center gap-2">
+              Happiness
+              <svg class="w-8 h-8 text-[#A37449] inline-block mt-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+              </svg>
+            </span>
+          </h1>
+
+          <p class="font-script text-2xl sm:text-[28px] text-[#B07D4F] mt-3 mb-3">
+            Made with love, every day.
+          </p>
+
+          <p class="text-sm sm:text-[15px] text-[#5B412E] leading-relaxed mb-7 max-w-md">
+            At CookieUp, we believe that the best moments in life are made sweeter with freshly baked cookies.
+          </p>
+
+          <a href="#menu" class="inline-flex items-center gap-3 bg-[#5E3313] hover:bg-[#47250C] text-white text-sm font-medium px-6 py-3 rounded-md shadow-md transition">
+            <span>Discover Our Menu</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR FAVORITES / KATALOG PRODUK COOKIES -->
+  <section id="menu" class="py-14 sm:py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10">
+        <h2 class="font-serif font-bold text-3xl sm:text-[36px] text-[#3B200D]">Our Favorites</h2>
+        <div class="ornament-divider mt-3">
+          <span class="w-2 h-2 rotate-45 bg-[#D4B898] inline-block"></span>
+        </div>
+      </div>
+
+      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- 4 VALUES BAND -->
+  <section id="about" class="relative bg-[#F3ECE1] border-y border-[#E8DDD0] py-12 overflow-hidden">
+    <svg class="hidden md:block absolute right-4 bottom-0 w-44 h-36 text-[#DFD2C3] pointer-events-none opacity-80" viewBox="0 0 200 160" fill="none" stroke="currentColor" stroke-width="1.8">
+      <path d="M90 140 C85 95, 100 65, 125 60 C150 65, 165 95, 160 140 Z" fill="#EDE4D6"/>
+      <path d="M105 58 C115 45, 135 45, 145 58" />
+      <path d="M128 50 L145 25 L160 32 L140 58" fill="#FAF6F0"/>
+      <path d="M20 145 Q55 125 90 140 M35 135 Q55 110 75 125" stroke-linecap="round"/>
+    </svg>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <div class="flex flex-col items-center">
+          <div class="w-14 h-14 rounded-full bg-white shadow-sm border border-[#EAE0D2] flex items-center justify-center mb-3.5 text-[#9E6E42]">
+            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-15c3 0 5-2 5-2s0 3-2 5m-3-3c-3 0-5-2-5-2s0 3 2 5m3 1c3 0 5-2 5-2s0 3-2 5m-3-3c-3 0-5-2-5-2s0 3 2 5" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-sm text-[#3B200D] mb-1">Quality Ingredients</h3>
+          <p class="text-xs text-[#6B5344] leading-relaxed max-w-[190px]">We use the finest ingredients for the best flavor.</p>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <div class="w-14 h-14 rounded-full bg-white shadow-sm border border-[#EAE0D2] flex items-center justify-center mb-3.5 text-[#9E6E42]">
+            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 15v3a1 1 0 001 1h10a1 1 0 001-1v-3m-12 0a4 4 0 01-1.5-7.7A4.5 4.5 0 0112 4a4.5 4.5 0 017.5 3.3A4 4 0 0118 15H6z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-sm text-[#3B200D] mb-1">Made Fresh Daily</h3>
+          <p class="text-xs text-[#6B5344] leading-relaxed max-w-[190px]">Everything is baked fresh every morning.</p>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <div class="w-14 h-14 rounded-full bg-white shadow-sm border border-[#EAE0D2] flex items-center justify-center mb-3.5 text-[#9E6E42]">
+            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-sm text-[#3B200D] mb-1">Made with Love</h3>
+          <p class="text-xs text-[#6B5344] leading-relaxed max-w-[190px]">Baked with passion and love in every bite.</p>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <div class="w-14 h-14 rounded-full bg-white shadow-sm border border-[#EAE0D2] flex items-center justify-center mb-3.5 text-[#9E6E42]">
+            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 11h12v4a5 5 0 01-5 5H9a5 5 0 01-5-5v-4zm12 1h2a2 2 0 010 4h-2M8 7c0-1.5 1-2 1-3m4 3c0-1.5 1-2 1-3" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-sm text-[#3B200D] mb-1">Cozy Atmosphere</h3>
+          <p class="text-xs text-[#6B5344] leading-relaxed max-w-[190px]">Relax, enjoy, and feel at home.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LET'S JOIN OUR COOKIEUP LOVERS -->
+  <section id="club" class="py-12 sm:py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div class="md:col-span-5">
+          <img
+            src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80"
+            alt="Coffee and Cookies"
+            class="w-full h-60 object-cover rounded-lg shadow-sm border border-[#EAE0D2]"
+          />
+        </div>
+
+        <div class="md:col-span-7 md:pl-6">
+          <h2 class="font-serif font-bold text-3xl text-[#3B200D]">Let's join our CookieUp lovers</h2>
+          <div class="flex items-center gap-2 my-3">
+            <span class="h-[1px] w-16 bg-[#DECDB9]"></span>
+            <span class="w-1.5 h-1.5 rotate-45 bg-[#D4B898]"></span>
+            <span class="h-[1px] flex-1 max-w-[180px] bg-[#DECDB9]"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (Tanpa Jam Operasional) -->
+  <footer id="visit" class="bg-[#F8F2EA] border-t border-[#E8DDD0] pt-10 pb-6">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-8 border-b border-[#E8DDD0]">
+        <div class="flex items-center gap-2.5">
+          <span class="text-2xl leading-none">🍪</span>
+          <div class="flex flex-col items-center">
+            <span class="font-serif font-bold text-xl text-[#3B200D] leading-none">CookieUp</span>
+            <div class="flex items-center gap-1 mt-1">
+              <span class="h-[1px] w-4 bg-[#CBB8A3]"></span>
+              <span class="text-[8px] tracking-[0.26em] text-[#7D5E47] font-semibold uppercase">COOKIES</span>
+              <span class="h-[1px] w-4 bg-[#CBB8A3]"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-10 text-xs text-[#5B412E]">
+          <div class="flex items-center gap-2.5">
+            <svg class="w-4 h-4 text-[#7D5E47] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+            </svg>
+            <span id="footer-address">Jl. Baker Manis No. 123, Jakarta Selatan</span>
+          </div>
+
+          <div class="flex items-center gap-2.5">
+            <svg class="w-4 h-4 text-[#7D5E47] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+            </svg>
+            <span id="footer-phone">081234567890</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <a href="#visit" aria-label="Facebook" class="w-8 h-8 rounded-full bg-[#E8D8C6] hover:bg-[#D8C2AA] text-[#4B2C16] flex items-center justify-center text-xs font-bold transition">f</a>
+          <a href="#visit" aria-label="Instagram" class="w-8 h-8 rounded-full bg-[#E8D8C6] hover:bg-[#D8C2AA] text-[#4B2C16] flex items-center justify-center transition">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="#visit" aria-label="TikTok" class="w-8 h-8 rounded-full bg-[#E8D8C6] hover:bg-[#D8C2AA] text-[#4B2C16] flex items-center justify-center text-xs font-bold transition">♪</a>
+        </div>
+      </div>
+
+      <p class="text-center text-xs text-[#8C7564] mt-5">
+        © 2026 CookieUp. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- CART & CHECKOUT DRAWER (PEMBELI) -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+    <div id="cart-backdrop" class="absolute inset-0 bg-black/50 backdrop-blur-xs"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-[#FAF6F0] shadow-2xl flex flex-col">
+      <div class="px-5 py-4 bg-white border-b border-[#EAE0D2] flex items-center justify-between">
+        <div>
+          <h3 class="font-serif font-bold text-xl text-[#3B200D]">Keranjang Belanja</h3>
+          <p class="text-xs text-[#7D5E47]">Atur jumlah cookies dan pilih metode pengiriman</p>
+        </div>
+        <button id="close-cart-btn" class="w-8 h-8 rounded-full bg-[#F3ECE1] hover:bg-[#E5D7C6] text-[#3B200D] font-bold">✕</button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-5 space-y-5">
+        <div id="cart-items-list" class="space-y-3"></div>
+
+        <form id="checkout-form" class="space-y-4 pt-4 border-t border-[#E5D7C6]">
+          <div id="checkout-closed-notice" class="hidden bg-red-50 border border-red-200 text-red-700 p-3 rounded-lg text-xs font-semibold">
+            🔒 Toko sedang Close Order. Pesanan saat ini dikunci.
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-[#3B200D] mb-1">Nama Pembeli *</label>
+            <input id="cust-name" type="text" required placeholder="Contoh: Rina Sari" class="w-full bg-white border border-[#DECDB9] rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#5E3313]" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-[#3B200D] mb-1">No. WhatsApp Pembeli *</label>
+            <input id="cust-phone" type="tel" required placeholder="Contoh: 08123456789" class="w-full bg-white border border-[#DECDB9] rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#5E3313]" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-[#3B200D] mb-1.5">Pilihan Pengiriman *</label>
+            <div class="grid grid-cols-2 gap-2.5">
+              <label class="cursor-pointer">
+                <input type="radio" name="deliveryType" value="Take Away" checked class="peer hidden" />
+                <div class="peer-checked:bg-[#5E3313] peer-checked:text-white peer-checked:border-[#5E3313] bg-white border border-[#DECDB9] rounded-lg py-2 px-3 text-center text-xs font-semibold transition">
+                  🛍️ Take Away
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="deliveryType" value="Delivery" class="peer hidden" />
+                <div class="peer-checked:bg-[#5E3313] peer-checked:text-white peer-checked:border-[#5E3313] bg-white border border-[#DECDB9] rounded-lg py-2 px-3 text-center text-xs font-semibold transition">
+                  🛵 Delivery
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div id="takeaway-box">
+            <label class="block text-xs font-semibold text-[#3B200D] mb-1">Jam Pengambilan (Take Away) *</label>
+            <input id="pickup-time" type="time" required class="w-full bg-white border border-[#DECDB9] rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#5E3313]" />
+          </div>
+
+          <div id="delivery-box" class="hidden">
+            <label class="block text-xs font-semibold text-[#3B200D] mb-1">Alamat Lengkap Pengiriman *</label>
+            <textarea id="delivery-address" rows="2" placeholder="Jalan, No. Rumah, RT/RW, Kecamatan, Patokan..." class="w-full bg-white border border-[#DECDB9] rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#5E3313]"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-[#3B200D] mb-1.5">Metode Pembayaran *</label>
+            <div class="grid grid-cols-2 gap-2.5">
+              <label class="cursor-pointer">
+                <input type="radio" name="paymentMethod" value="QRIS" checked class="peer hidden" />
+                <div class="peer-checked:bg-[#5E3313] peer-checked:text-white peer-checked:border-[#5E3313] bg-white border border-[#DECDB9] rounded-lg py-2 px-3 text-center text-xs font-semibold transition">
+                  📱 QRIS
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="paymentMethod" value="Transfer" class="peer hidden" />
+                <div class="peer-checked:bg-[#5E3313] peer-checked:text-white peer-checked:border-[#5E3313] bg-white border border-[#DECDB9] rounded-lg py-2 px-3 text-center text-xs font-semibold transition">
+                  🏦 Transfer Bank
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div id="payment-qris-box" class="bg-white border border-[#E5D7C6] rounded-xl p-4 text-center">
+            <p class="text-xs font-semibold text-[#3B200D] mb-2">Scan QRIS CookieUp</p>
+            <img id="buyer-qris-img" src="" alt="QRIS CookieUp" class="w-44 h-44 object-contain mx-auto border border-[#EFE6DA] rounded-lg bg-white p-1" />
+            <button type="button" id="download-qris-btn" class="mt-3 inline-flex items-center gap-1.5 bg-[#F3ECE1] hover:bg-[#E5D7C6] text-[#3B200D] text-xs font-semibold px-4 py-2 rounded-lg transition">
+              ⬇️ Unduh QRIS
+            </button>
+          </div>
+
+          <div id="payment-transfer-box" class="hidden bg-white border border-[#E5D7C6] rounded-xl p-4">
+            <p class="text-xs font-semibold text-[#7D5E47] mb-1">Transfer ke Rekening:</p>
+            <p class="text-sm font-bold text-[#3B200D]" id="buyer-bank-name">BCA</p>
+            <div class="flex items-center justify-between bg-[#FAF6F0] border border-[#E5D7C6] rounded-lg px-3 py-2 my-2">
+              <span id="buyer-bank-account" class="font-mono font-bold text-base text-[#3B200D]">1234567890</span>
+              <button type="button" id="copy-bank-btn" class="text-xs bg-[#5E3313] text-white px-3 py-1 rounded-md font-semibold hover:bg-[#47250C]">
+                Salin
+              </button>
+            </div>
+            <p class="text-xs text-[#6B5344]">a.n <span id="buyer-bank-holder" class="font-semibold">CookieUp Bakery</span></p>
+          </div>
+
+          <div class="bg-white border border-[#E5D7C6] rounded-xl p-4">
+            <div class="flex items-center justify-between text-sm mb-3">
+              <span class="text-[#6B5344]">Total Pembayaran</span>
+              <span id="checkout-total" class="font-bold text-lg text-[#5E3313]">Rp 0</span>
+            </div>
+            <button id="submit-order-btn" type="submit" class="w-full bg-[#5E3313] hover:bg-[#47250C] disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg shadow-sm transition text-sm">
+              Buat Pesanan & Lihat Struk
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL STRUK DIGITAL & KIRIM WHATSAPP -->
+  <div id="receipt-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-[#EAE0D2] max-h-[92vh] overflow-y-auto">
+      <div class="text-center border-b border-dashed border-[#D5C3B0] pb-4 mb-4">
+        <span class="text-3xl">🍪</span>
+        <h3 class="font-serif font-bold text-2xl text-[#3B200D]">Struk Digital CookieUp</h3>
+        <p class="text-xs text-[#7D5E47]">Pesanan tercatat otomatis di sistem toko</p>
+      </div>
+
+      <div id="receipt-content" class="text-xs space-y-2 text-[#3B200D]"></div>
+
+      <div class="mt-6 flex flex-col gap-2.5">
+        <a id="send-wa-btn" href="#" target="_blank" rel="noopener" class="w-full bg-[#25D366] hover:bg-[#1EB958] text-white font-bold py-3 rounded-lg text-center text-sm shadow-sm transition">
+          💬 Kirim Pesanan ke WhatsApp
+        </a>
+        <button id="close-receipt-btn" class="w-full bg-[#F3ECE1] hover:bg-[#E5D7C6] text-[#3B200D] font-semibold py-2.5 rounded-lg text-sm transition">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL LOGIN ADMIN -->
+  <div id="admin-login-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+    <div class="bg-[#FAF6F0] rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-[#DECDB9]">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🍪</span>
+          <h3 class="font-serif font-bold text-xl text-[#3B200D]">Admin Login</h3>
+        </div>
+        <button id="close-login-modal" class="w-7 h-7 rounded-full bg-[#EFE6DA] text-[#3B200D] font-bold text-xs">✕</button>
+      </div>
+
+      <form id="admin-login-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-[#3B200D] mb-1.5">Password Admin</label>
+          <div class="relative">
+            <input id="admin-password-input" type="password" required placeholder="Masukkan password..." class="w-full bg-white border border-[#DECDB9] rounded-lg pl-3.5 pr-10 py-2.5 text-sm focus:outline-none focus:border-[#5E3313]" />
+            <button type="button" id="toggle-password-eye" title="Lihat/Sembunyikan Password" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#7D5E47] hover:text-[#3B200D] p-1">
+              <svg id="eye-open-icon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <svg id="eye-closed-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+              </svg>
+            </button>
+          </div>
+          <p id="login-error-msg" class="text-xs text-red-600 mt-1.5 hidden"></p>
+        </div>
+
+        <button type="submit" class="w-full bg-[#5E3313] hover:bg-[#47250C] text-white font-semibold py-2.5 rounded-lg text-sm transition">
+          Masuk Dashboard Admin
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD ADMIN -->
+  <div id="admin-dashboard-modal" class="fixed inset-0 z-50 hidden bg-[#FAF6F0] overflow-y-auto">
+    <div class="sticky top-0 z-20 bg-white border-b border-[#E5D7C6] px-4 sm:px-8 py-4 flex flex-wrap items-center justify-between gap-4 shadow-xs">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl">🍪</span>
+        <div>
+          <h2 class="font-serif font-bold text-xl text-[#3B200D]">CookieUp Admin Panel</h2>
+          <p id="sync-status-label" class="text-xs font-medium"></p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 flex-wrap">
+        <div class="flex items-center gap-2.5 bg-[#FAF6F0] border border-[#DECDB9] px-3.5 py-2 rounded-xl">
+          <span class="text-xs font-bold text-[#3B200D]">Status Toko:</span>
+          <button id="toggle-store-open-btn" type="button" class="px-3 py-1 rounded-full text-xs font-bold transition">
+            OPEN ORDER
+          </button>
+        </div>
+        <button id="close-admin-btn" class="bg-[#5E3313] hover:bg-[#47250C] text-white text-xs font-semibold px-4 py-2.5 rounded-lg">
+          Kembali ke Toko
+        </button>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-6 space-y-6">
+      <div class="flex gap-2 border-b border-[#E5D7C6] pb-3 overflow-x-auto">
+        <button data-tab="orders" class="admin-tab-btn bg-[#5E3313] text-white px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap">📊 Spreadsheet Pesanan</button>
+        <button data-tab="products" class="admin-tab-btn bg-white text-[#3B200D] border border-[#DECDB9] px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap">🍪 Kelola Menu Cookies</button>
+        <button data-tab="settings" class="admin-tab-btn bg-white text-[#3B200D] border border-[#DECDB9] px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap">⚙️ Rekening, WA & QRIS</button>
+      </div>
+
+      <!-- TAB 1: SPREADSHEET PESANAN -->
+      <div id="tab-orders" class="admin-tab-panel space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-white border border-[#E5D7C6] rounded-xl p-4">
+            <p class="text-xs text-[#7D5E47]">Total Omzet</p>
+            <p id="admin-total-omzet" class="font-serif font-bold text-2xl text-[#5E3313] mt-1">Rp 0</p>
+          </div>
+          <div class="bg-white border border-[#E5D7C6] rounded-xl p-4">
+            <p class="text-xs text-[#7D5E47]">Total Pesanan</p>
+            <p id="admin-total-orders" class="font-serif font-bold text-2xl text-[#3B200D] mt-1">0</p>
+          </div>
+          <div class="bg-white border border-[#E5D7C6] rounded-xl p-4 flex items-center justify-between gap-2">
+            <button id="copy-recap-btn" class="flex-1 bg-[#F3ECE1] hover:bg-[#E5D7C6] text-[#3B200D] text-xs font-bold py-2.5 px-3 rounded-lg transition">
+              📋 Salin Rekap
+            </button>
+            <button id="clear-recap-btn" class="flex-1 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-bold py-2.5 px-3 rounded-lg transition">
+              🗑️ Bersihkan Rekap
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-white border border-[#DECDB9] rounded-xl overflow-hidden shadow-xs">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead class="bg-[#F3ECE1] text-[#3B200D] border-b border-[#DECDB9]">
+                <tr>
+                  <th class="p-3 border-r border-[#E5D7C6]">ID & Waktu</th>
+                  <th class="p-3 border-r border-[#E5D7C6]">Pembeli</th>
+                  <th class="p-3 border-r border-[#E5D7C6]">Detail Cookies</th>
+                  <th class="p-3 border-r border-[#E5D7C6]">Pengiriman</th>
+                  <th class="p-3 border-r border-[#E5D7C6]">Bayar</th>
+                  <th class="p-3 border-r border-[#E5D7C6]">Total</th>
+                  <th class="p-3">Status</th>
+                </tr>
+              </thead>
+              <tbody id="admin-orders-tbody" class="divide-y divide-[#EFE6DA]"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: KELOLA PRODUK -->
+      <div id="tab-products" class="admin-tab-panel hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-4 bg-white border border-[#DECDB9] rounded-xl p-5 h-fit">
+          <h3 id="product-form-title" class="font-serif font-bold text-lg text-[#3B200D] mb-4">Tambah Menu Baru</h3>
+          <form id="admin-product-form" class="space-y-3.5">
+            <input type="hidden" id="prod-id" />
+            <div>
+              <label class="block text-xs font-semibold mb-1">Nama Menu Cookies *</label>
+              <input id="prod-name" type="text" required placeholder="Contoh: Lotus Biscoff" class="w-full border border-[#DECDB9] rounded-lg px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">Harga (Rp) *</label>
+              <input id="prod-price" type="number" min="1000" required placeholder="25000" class="w-full border border-[#DECDB9] rounded-lg px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">Deskripsi *</label>
+              <textarea id="prod-desc" rows="2" required placeholder="Deskripsi singkat cookies..." class="w-full border border-[#DECDB9] rounded-lg px-3 py-2 text-sm"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">Foto Produk (Link URL atau Unggah Galeri HP)</label>
+              <input id="prod-img-url" type="text" placeholder="https://..." class="w-full border border-[#DECDB9] rounded-lg px-3 py-2 text-xs mb-2" />
+              <label class="block cursor-pointer bg-[#F3ECE1] hover:bg-[#E5D7C6] text-center text-xs font-semibold py-2 px-3 rounded-lg border border-dashed border-[#B07D4F]">
+                📷 Pilih Foto dari Galeri HP / File
+                <input id="prod-img-file" type="file" accept="image/*" class="hidden" />
+              </label>
+              <img id="prod-img-preview" src="" alt="" class="hidden mt-2 w-full h-32 object-cover rounded-lg border border-[#EAE0D2]" />
+            </div>
+            <div class="flex gap-2 pt-2">
+              <button type="submit" class="flex-1 bg-[#5E3313] hover:bg-[#47250C] text-white font-semibold py-2.5 rounded-lg text-xs">
+                Simpan Menu
+              </button>
+              <button type="button" id="cancel-edit-prod-btn" class="hidden bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-3 py-2.5 rounded-lg text-xs">
+                Batal
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4" id="admin-products-list"></div>
+      </div>
+
+      <!-- TAB 3: PENGATURAN TOKO, WA, REKENING & QRIS (Tanpa Jam Operasional) -->
+      <div id="tab-settings" class="admin-tab-panel hidden max-w-2xl bg-white border border-[#DECDB9] rounded-xl p-6">
+        <h3 class="font-serif font-bold text-lg text-[#3B200D] mb-4">Pengaturan Toko & Pembayaran</h3>
+        <form id="admin-settings-form" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold mb-1">Nomor WhatsApp Admin *</label>
+            <input id="set-wa" type="text" required class="w-full border border-[#DECDB9] rounded-lg px-3 py-2 text-sm" />
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold mb-1">Alamat Toko (Tampil di Footer)</label>
+            <input id="set-address" type="text" class="w-full border border-[#DECDB9] rounded-lg px-3 py-2 text-sm" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-[#EFE6DA]">
+            <div>
+              <label class="block text-xs font-semibold mb-1">Nama Bank</label>
+              <input id="set-bank-name" type="text" class="w-full border border-[#DECDB9] rounded-lg px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">Nomor Rekening</label>
+              <input id="set-bank-acc" type="text" class="w-full border border-[#DECDB9] rounded-lg px-3 py-2 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold mb-1">Atas Nama</label>
+              <input id="set-bank-holder" type="text" class="w-full border border-[#DECDB9] rounded-lg px-3 py-2 text-sm" />
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-[#EFE6DA]">
+            <label class="block text-xs font-semibold mb-1">Gambar QRIS (Link URL atau Unggah dari Galeri HP)</label>
+            <input id="set-qris-url" type="text" placeholder="https://... atau unggah dari galeri" class="w-full border border-[#DECDB9] rounded-lg px-3 py-2 text-xs mb-2" />
+            <label class="inline-block cursor-pointer bg-[#F3ECE1] hover:bg-[#E5D7C6] text-xs font-semibold py-2 px-4 rounded-lg border border-dashed border-[#B07D4F]">
+              📷 Unggah Foto QRIS
+              <input id="set-qris-file" type="file" accept="image/*" class="hidden" />
+            </label>
+            <div class="mt-3">
+              <img id="set-qris-preview" src="" alt="Preview QRIS" class="w-36 h-36 object-contain border border-[#EAE0D2] rounded-lg p-1 bg-white" />
+            </div>
+          </div>
+
+          <button type="submit" class="bg-[#5E3313] hover:bg-[#47250C] text-white font-semibold px-6 py-2.5 rounded-lg text-sm transition">
+            💾 Simpan Semua Pengaturan
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="fixed top-5 right-5 z-[60] hidden bg-[#3B200D] text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-xl"></div>
+
+  <script>
+    // =========================================================================
+    // TEMPEL LINK FIREBASE REALTIME DATABASE ANDA DI BAWAH INI (DI ANTARA TANDA PETIK)
+    // =========================================================================
+    const DEFAULT_FIREBASE_URL = 'https://cookieup-e7d33-default-rtdb.asia-southeast1.firebasedatabase.app';
+    const ADMIN_PASSWORD = 'admincookieup';
+
+    const FIREBASE_URL = DEFAULT_FIREBASE_URL.trim().replace(/\/+$/, '');
+    const HAS_FIREBASE = /^https:\/\/.+/i.test(FIREBASE_URL);
+
+    const DEFAULT_SETTINGS = {
+      storeName: 'CookieUp',
+      isOpen: true,
+      whatsapp: '081234567890',
+      bankName: 'BCA',
+      bankAccount: '1234567890',
+      bankHolder: 'CookieUp Bakery',
+      address: 'Jl. Baker Manis No. 123, Jakarta Selatan',
+      qrisImage: ''
+    };
+
+    const DEFAULT_PRODUCTS = [
+      {
+        id: 'c1',
+        name: 'Classic Choco Chip',
+        description: 'Buttery, chewy center, and loaded with melted dark chocolate chips.',
+        price: 25000,
+        image: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 'c2',
+        name: 'Double Fudge Cocoa',
+        description: 'Rich chocolate dough with gooey dark cocoa chunks for choco lovers.',
+        price: 28000,
+        image: 'https://images.unsplash.com/photo-1618923850107-d1a234d7a73a?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 'c3',
+        name: 'Matcha White Choco',
+        description: 'Premium Uji matcha cookie baked crisp on the edge and soft inside.',
+        price: 30000,
+        image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=800&q=80'
+      },
+      {
+        id: 'c4',
+        name: 'Red Velvet Cream',
+        description: 'Velvety crimson cookie filled with smooth vanilla cream cheese.',
+        price: 29000,
+        image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80'
+      }
+    ];
+
+    let isAdminLoggedIn = false;
+    let lastKnownVersion = 0;
+    let cart = JSON.parse(localStorage.getItem('cookieup_cart') || '{}');
+    let state = loadLocalCache();
+
+    const $ = (id) => document.getElementById(id);
+
+    function loadLocalCache() {
+      try {
+        const cached = JSON.parse(localStorage.getItem('cookieup_state') || 'null');
+        if (cached && cached.settings) return cached;
+      } catch {}
+      return {
+        initialized: true,
+        settings: { ...DEFAULT_SETTINGS },
+        products: [...DEFAULT_PRODUCTS],
+        orders: [],
+        version: 0
+      };
+    }
+
+    function saveLocalCache() {
+      localStorage.setItem('cookieup_state', JSON.stringify(state));
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function formatRupiah(num) {
+      return 'Rp ' + Number(num || 0).toLocaleString('id-ID');
+    }
+
+    function normalizeWa(phone) {
+      let clean = String(phone || '').replace(/\D/g, '');
+      if (clean.startsWith('0')) clean = '62' + clean.slice(1);
+      else if (clean.startsWith('8')) clean = '62' + clean;
+      return clean;
+    }
+
+    function showToast(msg) {
+      const t = $('toast');
+      t.textContent = msg;
+      t.classList.remove('hidden');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => t.classList.add('hidden'), 2800);
+    }
+
+    function getDefaultQrisDataUrl() {
+      const c = document.createElement('canvas');
+      c.width = 320;
+      c.height = 360;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, 320, 360);
+      ctx.fillStyle = '#3B200D';
+      ctx.font = 'bold 20px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('QRIS - COOKIEUP', 160, 34);
+      ctx.strokeStyle = '#3B200D';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(40, 50, 240, 240);
+      [[55, 65], [215, 65], [55, 225]].forEach(([x, y]) => {
+        ctx.fillRect(x, y, 50, 50);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(x + 8, y + 8, 34, 34);
+        ctx.fillStyle = '#3B200D';
+        ctx.fillRect(x + 15, y + 15, 20, 20);
+      });
+      for (let r = 0; r < 14; r++) {
+        for (let col = 0; col < 14; col++) {
+          if ((r < 5 && col < 5) || (r < 5 && col > 8) || (r > 8 && col < 5)) continue;
+          if ((r * 7 + col * 13) % 3 === 0) {
+            ctx.fillRect(58 + col * 14, 68 + r * 14, 10, 10);
+          }
+        }
+      }
+      ctx.font = '13px sans-serif';
+      ctx.fillText('Scan untuk membayar', 160, 325);
+      return c.toDataURL('image/png');
+    }
+    const FALLBACK_QRIS = getDefaultQrisDataUrl();
+
+    function compressImage(file, maxDim = 800, asPng = false) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            let { width, height } = img;
+            if (width > maxDim || height > maxDim) {
+              if (width > height) {
+                height = Math.round((height * maxDim) / width);
+                width = maxDim;
+              } else {
+                width = Math.round((width * maxDim) / height);
+                height = maxDim;
+              }
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(asPng ? canvas.toDataURL('image/png') : canvas.toDataURL('image/jpeg', 0.78));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // ==========================================
+    // FIREBASE REAL-TIME CLOUD SYNC
+    // ==========================================
+    async function fbRequest(path, method = 'GET', body = null) {
+      const opts = { method, cache: 'no-store' };
+      if (body !== null) {
+        opts.headers = { 'Content-Type': 'application/json' };
+        opts.body = JSON.stringify(body);
+      }
+      const res = await fetch(`${FIREBASE_URL}/cookieup_store${path}.json`, opts);
+      if (!res.ok) throw new Error('Firebase error: ' + res.status);
+      return res.json();
+    }
+
+    async function bumpFirebaseVersion() {
+      const v = Date.now();
+      lastKnownVersion = v;
+      state.version = v;
+      saveLocalCache();
+      if (HAS_FIREBASE) {
+        await fbRequest('/version', 'PUT', v);
+      }
+    }
+
+    function normalizeFirebasePayload(raw) {
+      const settings = { ...DEFAULT_SETTINGS, ...(raw.settings || {}) };
+      let products = [];
+      if (Array.isArray(raw.products)) {
+        products = raw.products.filter(Boolean);
+      } else if (raw.products && typeof raw.products === 'object') {
+        products = Object.values(raw.products).filter(Boolean);
+      }
+      let orders = [];
+      if (raw.orders && typeof raw.orders === 'object') {
+        orders = Object.entries(raw.orders)
+          .filter(([, val]) => val && typeof val === 'object')
+          .map(([fbKey, val]) => ({ ...val, _fbKey: fbKey }))
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      }
+      return {
+        initialized: true,
+        settings,
+        products,
+        orders,
+        version: Number(raw.version || Date.now())
+      };
+    }
+
+    async function syncFromCloud(forceFull = false) {
+      if (!HAS_FIREBASE) {
+        renderAll();
+        return;
+      }
+      try {
+        if (!forceFull && lastKnownVersion > 0) {
+          const remoteVer = await fbRequest('/version', 'GET');
+          if (Number(remoteVer || 0) === lastKnownVersion) return;
+        }
+        const raw = await fbRequest('', 'GET');
+        if (!raw || !raw.initialized) {
+          const seed = {
+            initialized: true,
+            settings: { ...DEFAULT_SETTINGS },
+            products: [...DEFAULT_PRODUCTS],
+            orders: {},
+            version: Date.now()
+          };
+          await fbRequest('', 'PUT', seed);
+          state = normalizeFirebasePayload(seed);
+        } else {
+          state = normalizeFirebasePayload(raw);
+        }
+        lastKnownVersion = state.version;
+        saveLocalCache();
+        renderAll();
+      } catch (err) {
+        console.warn('Sync error:', err);
+      }
+    }
+
+    // ==========================================
+    // RENDER STOREFRONT (PEMBELI)
+    // ==========================================
+    function renderAll() {
+      const s = state.settings;
+      const isOpen = s.isOpen !== false;
+
+      $('closed-banner').classList.toggle('hidden', isOpen);
+      $('checkout-closed-notice').classList.toggle('hidden', isOpen);
+      $('submit-order-btn').disabled = !isOpen;
+      $('submit-order-btn').textContent = isOpen ? 'Buat Pesanan & Lihat Struk' : 'Toko Tutup (Pesanan Dikunci)';
+
+      $('footer-address').textContent = s.address || '-';
+      $('footer-phone').textContent = s.whatsapp || '-';
+      $('buyer-bank-name').textContent = s.bankName || '-';
+      $('buyer-bank-account').textContent = s.bankAccount || '-';
+      $('buyer-bank-holder').textContent = s.bankHolder || '-';
+      $('buyer-qris-img').src = s.qrisImage || FALLBACK_QRIS;
+
+      renderProducts();
+      renderCart();
+      if (!$('admin-dashboard-modal').classList.contains('hidden')) {
+        renderAdminDashboard();
+      }
+    }
+
+    function renderProducts() {
+      const grid = $('product-grid');
+      if (!state.products.length) {
+        grid.innerHTML = `<p class="col-span-full text-center text-sm text-[#7D5E47] py-8">Belum ada menu cookies tersedia.</p>`;
+        return;
+      }
+
+      const isOpen = state.settings.isOpen !== false;
+      grid.innerHTML = state.products.map((p) => {
+        const qty = cart[p.id] || 0;
+        const imgSrc = p.image || 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80';
+        return `
+          <div class="bg-white rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(67,36,15,0.06)] border border-[#EFE6DA] flex flex-col transition hover:-translate-y-0.5">
+            <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(p.name)}" class="w-full h-44 object-cover bg-[#F3ECE1]" />
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif font-bold text-lg text-[#3B200D] mb-1.5">${escapeHtml(p.name)}</h3>
+                <p class="text-xs text-[#6B5344] leading-relaxed mb-4">${escapeHtml(p.description)}</p>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-[#F5EFE6]">
+                <span class="font-semibold text-sm text-[#B06D3B]">${formatRupiah(p.price)}</span>
+                ${
+                  !isOpen
+                    ? `<span class="text-[11px] font-semibold text-red-600 bg-red-50 px-2.5 py-1 rounded-md">Tutup</span>`
+                    : qty === 0
+                    ? `<button onclick="changeCart('${escapeHtml(p.id)}', 1)" class="bg-[#5E3313] hover:bg-[#47250C] text-white text-xs font-semibold px-3 py-1.5 rounded-md transition">+ Pesan</button>`
+                    : `<div class="flex items-center gap-2 bg-[#F3ECE1] rounded-md px-1.5 py-1">
+                        <button onclick="changeCart('${escapeHtml(p.id)}', -1)" class="w-6 h-6 rounded bg-white text-[#3B200D] font-bold text-xs shadow-xs">-</button>
+                        <span class="text-xs font-bold w-4 text-center">${qty}</span>
+                        <button onclick="changeCart('${escapeHtml(p.id)}', 1)" class="w-6 h-6 rounded bg-[#5E3313] text-white font-bold text-xs">+</button>
+                      </div>`
+                }
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function changeCart(productId, delta) {
+      if (state.settings.isOpen === false && delta > 0) {
+        showToast('Maaf, toko sedang Close Order.');
+        return;
+      }
+      const next = (cart[productId] || 0) + delta;
+      if (next <= 0) delete cart[productId];
+      else cart[productId] = next;
+      localStorage.setItem('cookieup_cart', JSON.stringify(cart));
+      renderProducts();
+      renderCart();
+    }
+
+    function getCartSummary() {
+      const items = [];
+      let totalQty = 0;
+      let totalPrice = 0;
+      for (const p of state.products) {
+        const qty = cart[p.id] || 0;
+        if (qty > 0) {
+          const subtotal = qty * Number(p.price || 0);
+          items.push({ id: p.id, name: p.name, price: Number(p.price), qty, subtotal });
+          totalQty += qty;
+          totalPrice += subtotal;
+        }
+      }
+      return { items, totalQty, totalPrice };
+    }
+
+    function renderCart() {
+      const { items, totalQty, totalPrice } = getCartSummary();
+      $('cart-badge-count').textContent = totalQty;
+      $('checkout-total').textContent = formatRupiah(totalPrice);
+
+      const list = $('cart-items-list');
+      if (!items.length) {
+        list.innerHTML = `<div class="text-center py-6 text-xs text-[#7D5E47] bg-white rounded-xl border border-[#EAE0D2]">Keranjang masih kosong. Yuk pilih cookies favoritmu!</div>`;
+        return;
+      }
+
+      list.innerHTML = items.map((item) => `
+        <div class="bg-white border border-[#EAE0D2] rounded-xl p-3 flex items-center justify-between gap-3">
+          <div>
+            <p class="font-semibold text-sm text-[#3B200D]">${escapeHtml(item.name)}</p>
+            <p class="text-xs text-[#B06D3B]">${formatRupiah(item.price)} x ${item.qty} = <b>${formatRupiah(item.subtotal)}</b></p>
+          </div>
+          <div class="flex items-center gap-2 bg-[#F3ECE1] rounded-lg px-2 py-1">
+            <button type="button" onclick="changeCart('${escapeHtml(item.id)}', -1)" class="w-6 h-6 rounded bg-white text-[#3B200D] font-bold text-xs">-</button>
+            <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
+            <button type="button" onclick="changeCart('${escapeHtml(item.id)}', 1)" class="w-6 h-6 rounded bg-[#5E3313] text-white font-bold text-xs">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ==========================================
+    // DRAWER, DELIVERY, PAYMENT & RECEIPT
+    // ==========================================
+    $('open-cart-btn').onclick = () => $('cart-drawer').classList.remove('hidden');
+    $('close-cart-btn').onclick = () => $('cart-drawer').classList.add('hidden');
+    $('cart-backdrop').onclick = () => $('cart-drawer').classList.add('hidden');
+
+    document.querySelectorAll('input[name="deliveryType"]').forEach((el) => {
+      el.addEventListener('change', (e) => {
+        const isDeliv = e.target.value === 'Delivery';
+        $('takeaway-box').classList.toggle('hidden', isDeliv);
+        $('delivery-box').classList.toggle('hidden', !isDeliv);
+        $('pickup-time').required = !isDeliv;
+        $('delivery-address').required = isDeliv;
+      });
+    });
+
+    document.querySelectorAll('input[name="paymentMethod"]').forEach((el) => {
+      el.addEventListener('change', (e) => {
+        const isTransfer = e.target.value === 'Transfer';
+        $('payment-qris-box').classList.toggle('hidden', isTransfer);
+        $('payment-transfer-box').classList.toggle('hidden', !isTransfer);
+      });
+    });
+
+    $('download-qris-btn').onclick = async () => {
+      const src = $('buyer-qris-img').src;
+      try {
+        if (src.startsWith('data:')) {
+          const a = document.createElement('a');
+          a.href = src;
+          a.download = 'QRIS-CookieUp.png';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } else {
+          const res = await fetch(src);
+          const blob = await res.blob();
+          const objUrl = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = objUrl;
+          a.download = 'QRIS-CookieUp.png';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(objUrl);
+        }
+        showToast('QRIS diunduh!');
+      } catch {
+        window.open(src, '_blank');
+      }
+    };
+
+    $('copy-bank-btn').onclick = async () => {
+      const acc = $('buyer-bank-account').textContent;
+      await navigator.clipboard.writeText(acc);
+      showToast('Nomor rekening disalin: ' + acc);
+    };
+
+    $('checkout-form').onsubmit = async (e) => {
+      e.preventDefault();
+      const { items, totalPrice } = getCartSummary();
+      if (!items.length) return showToast('Keranjang masih kosong!');
+
+      const btn = $('submit-order-btn');
+      btn.disabled = true;
+      btn.textContent = 'Memproses pesanan...';
+
+      try {
+        if (HAS_FIREBASE) {
+          const liveIsOpen = await fbRequest('/settings/isOpen', 'GET');
+          if (liveIsOpen === false) {
+            state.settings.isOpen = false;
+            saveLocalCache();
+            renderAll();
+            showToast('Maaf, toko baru saja Close Order. Pesanan tidak dicatat.');
+            return;
+          }
+        } else if (state.settings.isOpen === false) {
+          showToast('Maaf, toko sedang Close Order.');
+          return;
+        }
+
+        const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+        const newOrder = {
+          id: 'CU-' + Math.floor(100000 + Math.random() * 900000),
+          createdAt: new Date().toISOString(),
+          customerName: $('cust-name').value.trim(),
+          customerPhone: $('cust-phone').value.trim(),
+          deliveryType,
+          pickupTime: deliveryType === 'Take Away' ? $('pickup-time').value : '',
+          address: deliveryType === 'Delivery' ? $('delivery-address').value.trim() : '',
+          paymentMethod,
+          items,
+          total: totalPrice,
+          status: 'Baru'
+        };
+
+        if (HAS_FIREBASE) {
+          const pushed = await fbRequest('/orders', 'POST', newOrder);
+          newOrder._fbKey = pushed.name;
+          await bumpFirebaseVersion();
+        }
+        state.orders.unshift(newOrder);
+        saveLocalCache();
+
+        cart = {};
+        localStorage.removeItem('cookieup_cart');
+        $('checkout-form').reset();
+        $('takeaway-box').classList.remove('hidden');
+        $('delivery-box').classList.add('hidden');
+        $('payment-qris-box').classList.remove('hidden');
+        $('payment-transfer-box').classList.add('hidden');
+        $('cart-drawer').classList.add('hidden');
+        renderAll();
+        showDigitalReceipt(newOrder);
+      } catch (err) {
+        showToast('Gagal menyimpan pesanan: ' + err.message);
+      } finally {
+        renderAll();
+      }
+    };
+
+    function showDigitalReceipt(order) {
+      const itemsHtml = order.items.map((i) => `
+        <div class="flex justify-between">
+          <span>${escapeHtml(i.name)} (${i.qty}x)</span>
+          <span class="font-semibold">${formatRupiah(i.subtotal)}</span>
+        </div>
+      `).join('');
+
+      const infoKirim = order.deliveryType === 'Take Away'
+        ? `Take Away (Jam Ambil: ${escapeHtml(order.pickupTime)})`
+        : `Delivery (${escapeHtml(order.address)})`;
+
+      $('receipt-content').innerHTML = `
+        <div class="flex justify-between"><span>No. Pesanan:</span><b>${escapeHtml(order.id)}</b></div>
+        <div class="flex justify-between"><span>Tanggal:</span><span>${new Date(order.createdAt).toLocaleString('id-ID')}</span></div>
+        <div class="flex justify-between"><span>Nama:</span><span>${escapeHtml(order.customerName)}</span></div>
+        <div class="flex justify-between"><span>No. HP:</span><span>${escapeHtml(order.customerPhone)}</span></div>
+        <div class="flex justify-between gap-4"><span>Pengiriman:</span><span class="text-right">${infoKirim}</span></div>
+        <div class="flex justify-between"><span>Pembayaran:</span><b>${escapeHtml(order.paymentMethod)}</b></div>
+        <div class="border-t border-dashed border-[#D5C3B0] my-3 pt-2 space-y-1.5">${itemsHtml}</div>
+        <div class="border-t border-dashed border-[#D5C3B0] pt-2 flex justify-between text-sm font-bold text-[#5E3313]">
+          <span>TOTAL BAYAR</span>
+          <span>${formatRupiah(order.total)}</span>
+        </div>
+      `;
+
+      const itemsText = order.items.map((i) => `- ${i.name} (${i.qty}x) = ${formatRupiah(i.subtotal)}`).join('\n');
+      const waText =
+`*PESANAN BARU - COOKIEUP* 🍪
+No. Order: ${order.id}
+Nama: ${order.customerName}
+No. WA: ${order.customerPhone}
+Pengiriman: ${order.deliveryType === 'Take Away' ? `Take Away (Jam ${order.pickupTime})` : `Delivery - ${order.address}`}
+Pembayaran: ${order.paymentMethod}
+
+*Detail Pesanan:*
+${itemsText}
+
+*Total: ${formatRupiah(order.total)}*
+Mohon diproses ya Kak, terima kasih!`;
+
+      const waNumber = normalizeWa(state.settings.whatsapp);
+      $('send-wa-btn').href = `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`;
+      $('receipt-modal').classList.remove('hidden');
+    }
+
+    $('close-receipt-btn').onclick = () => $('receipt-modal').classList.add('hidden');
+
+    // ==========================================
+    // ADMIN LOGIN & PANEL
+    // ==========================================
+    $('admin-logo-trigger').onclick = () => {
+      if (isAdminLoggedIn) {
+        openAdminDashboard();
+      } else {
+        $('login-error-msg').classList.add('hidden');
+        $('admin-password-input').value = '';
+        $('admin-login-modal').classList.remove('hidden');
+      }
+    };
+
+    $('close-login-modal').onclick = () => $('admin-login-modal').classList.add('hidden');
+
+    $('toggle-password-eye').onclick = () => {
+      const inp = $('admin-password-input');
+      const isPass = inp.type === 'password';
+      inp.type = isPass ? 'text' : 'password';
+      $('eye-open-icon').classList.toggle('hidden', isPass);
+      $('eye-closed-icon').classList.toggle('hidden', !isPass);
+    };
+
+    $('admin-login-form').onsubmit = (e) => {
+      e.preventDefault();
+      if ($('admin-password-input').value !== ADMIN_PASSWORD) {
+        $('login-error-msg').textContent = 'Password salah! Cek ketikan dengan ikon mata.';
+        $('login-error-msg').classList.remove('hidden');
+        return;
+      }
+      isAdminLoggedIn = true;
+      $('admin-login-modal').classList.add('hidden');
+      openAdminDashboard();
+    };
+
+    function openAdminDashboard() {
+      $('admin-dashboard-modal').classList.remove('hidden');
+      const lbl = $('sync-status-label');
+      if (HAS_FIREBASE) {
+        lbl.textContent = '● Sinkron Real-Time Firebase Aktif (Lintas Device)';
+        lbl.className = 'text-xs text-emerald-700 font-semibold';
+      } else {
+        lbl.textContent = '⚠️ Link Firebase belum diisi di index.html (Mode Lokal)';
+        lbl.className = 'text-xs text-amber-700 font-semibold';
+      }
+      populateSettingsForm();
+      renderAdminDashboard();
+    }
+
+    $('close-admin-btn').onclick = () => $('admin-dashboard-modal').classList.add('hidden');
+
+    document.querySelectorAll('.admin-tab-btn').forEach((btn) => {
+      btn.onclick = () => {
+        document.querySelectorAll('.admin-tab-btn').forEach((b) => {
+          b.className = 'admin-tab-btn bg-white text-[#3B200D] border border-[#DECDB9] px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap';
+        });
+        btn.className = 'admin-tab-btn bg-[#5E3313] text-white px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap';
+        document.querySelectorAll('.admin-tab-panel').forEach((p) => p.classList.add('hidden'));
+        $('tab-' + btn.dataset.tab).classList.remove('hidden');
+      };
+    });
+
+    $('toggle-store-open-btn').onclick = async () => {
+      const nextOpen = !(state.settings.isOpen !== false);
+      await saveSettings({ isOpen: nextOpen });
+      showToast(nextOpen ? 'Toko sekarang OPEN ORDER!' : 'Toko sekarang CLOSE ORDER (Pesanan dikunci)');
+    };
+
+    function renderAdminDashboard() {
+      const isOpen = state.settings.isOpen !== false;
+      const toggleBtn = $('toggle-store-open-btn');
+      toggleBtn.textContent = isOpen ? '🟢 OPEN ORDER' : '🔴 CLOSE ORDER';
+      toggleBtn.className = isOpen
+        ? 'px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800'
+        : 'px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-800';
+
+      renderAdminOrders();
+      renderAdminProducts();
+    }
+
+    function renderAdminOrders() {
+      const orders = state.orders || [];
+      const omzet = orders.reduce((sum, o) => sum + Number(o.total || 0), 0);
+      $('admin-total-omzet').textContent = formatRupiah(omzet);
+      $('admin-total-orders').textContent = orders.length;
+
+      const tbody = $('admin-orders-tbody');
+      if (!orders.length) {
+        tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-[#7D5E47]">Belum ada pesanan masuk.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = orders.map((o) => {
+        const itemsText = (o.items || []).map((i) => `${escapeHtml(i.name)} (${i.qty}x)`).join('<br>');
+        const shipInfo = o.deliveryType === 'Take Away'
+          ? `<b>Take Away</b><br>Jam: ${escapeHtml(o.pickupTime)}`
+          : `<b>Delivery</b><br>${escapeHtml(o.address)}`;
+        const statusColor = o.status === 'Selesai' ? 'bg-emerald-50 text-emerald-800' : o.status === 'Diproses' ? 'bg-amber-50 text-amber-800' : 'bg-blue-50 text-blue-800';
+
+        return `
+          <tr class="hover:bg-[#FAF6F0]">
+            <td class="p-3 border-r border-[#EFE6DA] whitespace-nowrap">
+              <b>${escapeHtml(o.id)}</b><br>
+              <span class="text-[10px] text-[#7D5E47]">${new Date(o.createdAt).toLocaleString('id-ID')}</span>
+            </td>
+            <td class="p-3 border-r border-[#EFE6DA]">
+              <b>${escapeHtml(o.customerName)}</b><br>
+              <span class="text-[#7D5E47]">${escapeHtml(o.customerPhone)}</span>
+            </td>
+            <td class="p-3 border-r border-[#EFE6DA]">${itemsText}</td>
+            <td class="p-3 border-r border-[#EFE6DA] max-w-[200px]">${shipInfo}</td>
+            <td class="p-3 border-r border-[#EFE6DA]">${escapeHtml(o.paymentMethod)}</td>
+            <td class="p-3 border-r border-[#EFE6DA] font-bold text-[#5E3313] whitespace-nowrap">${formatRupiah(o.total)}</td>
+            <td class="p-3">
+              <select onchange="updateOrderStatus('${escapeHtml(o.id)}', this.value)" class="border border-[#DECDB9] rounded-md px-2 py-1 text-xs font-semibold ${statusColor}">
+                <option value="Baru" ${o.status === 'Baru' ? 'selected' : ''}>Baru</option>
+                <option value="Diproses" ${o.status === 'Diproses' ? 'selected' : ''}>Diproses</option>
+                <option value="Selesai" ${o.status === 'Selesai' ? 'selected' : ''}>Selesai</option>
+              </select>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function updateOrderStatus(orderId, status) {
+      const order = state.orders.find((o) => o.id === orderId);
+      if (!order) return;
+      order.status = status;
+      saveLocalCache();
+      if (HAS_FIREBASE && order._fbKey) {
+        await fbRequest(`/orders/${order._fbKey}`, 'PATCH', { status });
+        await bumpFirebaseVersion();
+      }
+      renderAdminOrders();
+      showToast(`Status ${orderId} diubah ke ${status}`);
+    }
+
+    $('copy-recap-btn').onclick = async () => {
+      const orders = state.orders || [];
+      if (!orders.length) return showToast('Belum ada pesanan untuk disalin.');
+      const omzet = orders.reduce((sum, o) => sum + Number(o.total || 0), 0);
+      const lines = orders.map((o) => {
+        const items = (o.items || []).map((i) => `${i.name}(${i.qty})`).join(', ');
+        return `${o.id}\t${o.customerName}\t${o.customerPhone}\t${items}\t${o.deliveryType}\t${o.paymentMethod}\t${o.total}\t${o.status}`;
+      });
+      const text = `REKAP PESANAN COOKIEUP\nTotal Omzet: ${formatRupiah(omzet)}\nID\tNama\tHP\tMenu\tKirim\tBayar\tTotal\tStatus\n` + lines.join('\n');
+      await navigator.clipboard.writeText(text);
+      showToast('Rekap pesanan disalin ke clipboard!');
+    };
+
+    $('clear-recap-btn').onclick = async () => {
+      if (!confirm('Yakin ingin menghapus seluruh rekap pesanan?')) return;
+      state.orders = [];
+      saveLocalCache();
+      if (HAS_FIREBASE) {
+        await fbRequest('/orders', 'DELETE');
+        await bumpFirebaseVersion();
+      }
+      renderAdminOrders();
+      showToast('Rekap pesanan dibersihkan!');
+    };
+
+    // ==========================================
+    // KELOLA MENU COOKIES
+    // ==========================================
+    function renderAdminProducts() {
+      const container = $('admin-products-list');
+      container.innerHTML = state.products.map((p) => `
+        <div class="bg-white border border-[#DECDB9] rounded-xl overflow-hidden flex flex-col">
+          <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" class="w-full h-36 object-cover bg-[#F3ECE1]" />
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h4 class="font-serif font-bold text-base text-[#3B200D]">${escapeHtml(p.name)}</h4>
+              <p class="text-xs text-[#6B5344] my-1">${escapeHtml(p.description)}</p>
+              <p class="text-sm font-bold text-[#B06D3B]">${formatRupiah(p.price)}</p>
+            </div>
+            <div class="flex gap-2 mt-3 pt-2 border-t border-[#F3ECE1]">
+              <button onclick="editAdminProduct('${escapeHtml(p.id)}')" class="flex-1 bg-[#F3ECE1] hover:bg-[#E5D7C6] text-[#3B200D] text-xs font-semibold py-1.5 rounded-md">Edit</button>
+              <button onclick="deleteAdminProduct('${escapeHtml(p.id)}')" class="flex-1 bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold py-1.5 rounded-md">Hapus</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    $('prod-img-file').onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const dataUrl = await compressImage(file, 800, false);
+      $('prod-img-url').value = dataUrl;
+      $('prod-img-preview').src = dataUrl;
+      $('prod-img-preview').classList.remove('hidden');
+      showToast('Foto produk siap disimpan!');
+    };
+
+    $('prod-img-url').oninput = (e) => {
+      const val = e.target.value.trim();
+      if (val) {
+        $('prod-img-preview').src = val;
+        $('prod-img-preview').classList.remove('hidden');
+      }
+    };
+
+    function editAdminProduct(id) {
+      const p = state.products.find((x) => x.id === id);
+      if (!p) return;
+      $('product-form-title').textContent = 'Edit Menu Cookies';
+      $('prod-id').value = p.id;
+      $('prod-name').value = p.name;
+      $('prod-price').value = p.price;
+      $('prod-desc').value = p.description;
+      $('prod-img-url').value = p.image;
+      $('prod-img-preview').src = p.image;
+      $('prod-img-preview').classList.remove('hidden');
+      $('cancel-edit-prod-btn').classList.remove('hidden');
+    }
+
+    function resetProductForm() {
+      $('product-form-title').textContent = 'Tambah Menu Baru';
+      $('admin-product-form').reset();
+      $('prod-id').value = '';
+      $('prod-img-preview').classList.add('hidden');
+      $('cancel-edit-prod-btn').classList.add('hidden');
+    }
+
+    $('cancel-edit-prod-btn').onclick = resetProductForm;
+
+    async function saveProductsList(nextProducts) {
+      state.products = nextProducts;
+      saveLocalCache();
+      if (HAS_FIREBASE) {
+        await fbRequest('/initialized', 'PUT', true);
+        await fbRequest('/products', 'PUT', nextProducts);
+        await bumpFirebaseVersion();
+      }
+      renderAll();
+    }
+
+    $('admin-product-form').onsubmit = async (e) => {
+      e.preventDefault();
+      const id = $('prod-id').value;
+      const item = {
+        id: id || 'c-' + Date.now(),
+        name: $('prod-name').value.trim(),
+        price: Number($('prod-price').value),
+        description: $('prod-desc').value.trim(),
+        image: $('prod-img-url').value.trim() || 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80'
+      };
+
+      const nextProducts = [...state.products];
+      if (id) {
+        const idx = nextProducts.findIndex((x) => x.id === id);
+        if (idx !== -1) nextProducts[idx] = item;
+      } else {
+        nextProducts.push(item);
+      }
+
+      await saveProductsList(nextProducts);
+      resetProductForm();
+      showToast('Menu berhasil disimpan & langsung tersinkron ke pembeli!');
+    };
+
+    async function deleteAdminProduct(id) {
+      if (!confirm('Hapus menu ini?')) return;
+      const nextProducts = state.products.filter((x) => x.id !== id);
+      await saveProductsList(nextProducts);
+      showToast('Menu dihapus!');
+    }
+
+    // ==========================================
+    // PENGATURAN TOKO, WA, REKENING & QRIS
+    // ==========================================
+    function populateSettingsForm() {
+      const s = state.settings;
+      $('set-wa').value = s.whatsapp || '';
+      $('set-address').value = s.address || '';
+      $('set-bank-name').value = s.bankName || '';
+      $('set-bank-acc').value = s.bankAccount || '';
+      $('set-bank-holder').value = s.bankHolder || '';
+      $('set-qris-url').value = s.qrisImage || '';
+      $('set-qris-preview').src = s.qrisImage || FALLBACK_QRIS;
+    }
+
+    $('set-qris-file').onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const dataUrl = await compressImage(file, 650, true);
+      $('set-qris-url').value = dataUrl;
+      $('set-qris-preview').src = dataUrl;
+      showToast('Gambar QRIS siap disimpan!');
+    };
+
+    $('set-qris-url').oninput = (e) => {
+      $('set-qris-preview').src = e.target.value.trim() || FALLBACK_QRIS;
+    };
+
+    async function saveSettings(partial) {
+      state.settings = { ...state.settings, ...partial };
+      saveLocalCache();
+      if (HAS_FIREBASE) {
+        await fbRequest('/initialized', 'PUT', true);
+        await fbRequest('/settings', 'PATCH', partial);
+        await bumpFirebaseVersion();
+      }
+      renderAll();
+    }
+
+    $('admin-settings-form').onsubmit = async (e) => {
+      e.preventDefault();
+      await saveSettings({
+        whatsapp: $('set-wa').value.trim(),
+        address: $('set-address').value.trim(),
+        bankName: $('set-bank-name').value.trim(),
+        bankAccount: $('set-bank-acc').value.trim(),
+        bankHolder: $('set-bank-holder').value.trim(),
+        qrisImage: $('set-qris-url').value.trim()
+      });
+      showToast('Pengaturan toko & pembayaran tersimpan dan langsung sinkron!');
+    };
+
+    // ==========================================
+    // MULAI SINKRONISASI OTOMATIS
+    // ==========================================
+    renderAll();
+    syncFromCloud(true);
+    setInterval(() => syncFromCloud(false), 2500);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) syncFromCloud(false);
+    });
+  </script>
+</body>
+</html>
