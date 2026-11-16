@@ -78,7 +78,7 @@
       <div id="admin-logo-trigger" title="CookieUp" class="flex items-center gap-2.5 cursor-pointer select-none group">
         <span class="text-3xl leading-none transition-transform group-hover:scale-105" aria-hidden="true">🍪</span>
         <div class="flex flex-col items-center">
-          <span class="font-serif font-bold text-2xl sm:text-[26px] tracking-tight text-[#3B200D] leading-none">CookieUp</span>
+          <span class="font-serif font-bold text-2xl sm:text-[26px] tracking-tight text-[#3B200D] leading-none">CookedUp</span>
           <div class="flex items-center gap-1.5 mt-1 w-full justify-center">
             <span class="h-[1px] w-5 bg-[#CBB8A3]"></span>
             <span class="text-[9px] tracking-[0.28em] text-[#7D5E47] font-semibold uppercase">COOKIES</span>
@@ -228,7 +228,7 @@
         </div>
 
         <div class="md:col-span-7 md:pl-6">
-          <h2 class="font-serif font-bold text-3xl text-[#3B200D]">Let's join our CookieUp lovers</h2>
+          <h2 class="font-serif font-bold text-3xl text-[#3B200D]">Let's join our CookedUp lovers</h2>
           <div class="flex items-center gap-2 my-3">
             <span class="h-[1px] w-16 bg-[#DECDB9]"></span>
             <span class="w-1.5 h-1.5 rotate-45 bg-[#D4B898]"></span>
@@ -246,7 +246,7 @@
         <div class="flex items-center gap-2.5">
           <span class="text-2xl leading-none">🍪</span>
           <div class="flex flex-col items-center">
-            <span class="font-serif font-bold text-xl text-[#3B200D] leading-none">CookieUp</span>
+            <span class="font-serif font-bold text-xl text-[#3B200D] leading-none">CookedUp</span>
             <div class="flex items-center gap-1 mt-1">
               <span class="h-[1px] w-4 bg-[#CBB8A3]"></span>
               <span class="text-[8px] tracking-[0.26em] text-[#7D5E47] font-semibold uppercase">COOKIES</span>
@@ -282,7 +282,7 @@
       </div>
 
       <p class="text-center text-xs text-[#8C7564] mt-5">
-        © 2026 CookieUp. All rights reserved.
+        © 2026 CookedUp. All rights reserved.
       </p>
     </div>
   </footer>
@@ -364,7 +364,7 @@
           </div>
 
           <div id="payment-qris-box" class="bg-white border border-[#E5D7C6] rounded-xl p-4 text-center">
-            <p class="text-xs font-semibold text-[#3B200D] mb-2">Scan QRIS CookieUp</p>
+            <p class="text-xs font-semibold text-[#3B200D] mb-2">Scan QRIS CookedUp</p>
             <img id="buyer-qris-img" src="" alt="QRIS CookieUp" class="w-44 h-44 object-contain mx-auto border border-[#EFE6DA] rounded-lg bg-white p-1" />
             <button type="button" id="download-qris-btn" class="mt-3 inline-flex items-center gap-1.5 bg-[#F3ECE1] hover:bg-[#E5D7C6] text-[#3B200D] text-xs font-semibold px-4 py-2 rounded-lg transition">
               ⬇️ Unduh QRIS
@@ -461,7 +461,7 @@
       <div class="flex items-center gap-3">
         <span class="text-2xl">🍪</span>
         <div>
-          <h2 class="font-serif font-bold text-xl text-[#3B200D]">CookieUp Admin Panel</h2>
+          <h2 class="font-serif font-bold text-xl text-[#3B200D]">CookedUp Admin Panel</h2>
           <p id="sync-status-label" class="text-xs font-medium"></p>
         </div>
       </div>
@@ -1144,7 +1144,7 @@
 
       const itemsText = order.items.map((i) => `- ${i.name} (${i.qty}x) = ${formatRupiah(i.subtotal)}`).join('\n');
       const waText =
-`*PESANAN BARU - COOKIEUP* 🍪
+`*PESANAN BARU - COOKEDUP* 🍪
 No. Order: ${order.id}
 Nama: ${order.customerName}
 No. WA: ${order.customerPhone}
@@ -1310,7 +1310,7 @@ Mohon diproses ya Kak, terima kasih!`;
         const items = (o.items || []).map((i) => `${i.name}(${i.qty})`).join(', ');
         return `${o.id}\t${o.customerName}\t${o.customerPhone}\t${items}\t${o.deliveryType}\t${o.paymentMethod}\t${o.total}\t${o.status}`;
       });
-      const text = `REKAP PESANAN COOKIEUP\nTotal Omzet: ${formatRupiah(omzet)}\nID\tNama\tHP\tMenu\tKirim\tBayar\tTotal\tStatus\n` + lines.join('\n');
+      const text = `REKAP PESANAN COOKEDUP\nTotal Omzet: ${formatRupiah(omzet)}\nID\tNama\tHP\tMenu\tKirim\tBayar\tTotal\tStatus\n` + lines.join('\n');
       await navigator.clipboard.writeText(text);
       showToast('Rekap pesanan disalin ke clipboard!');
     };
